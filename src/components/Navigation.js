@@ -2,17 +2,14 @@ import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <header className="w-full h-16 bg-indigo-100">
-      <nav className="flex justify-around items-center h-full">
+    <header className="w-full h-20 bg-black text-white  mb-8">
+      <nav className="flex items-center h-full px-10">
         <ul className="flex items-center gap-x-6">
-          <h2>folan shopping</h2>
           <li>
             <NavLink className="navLinks" activeClassName="active" exact to="/">
               Home
             </NavLink>
           </li>
-        </ul>
-        <ul className="flex items-center gap-x-10">
           <li>
             <NavLink className="navLinks" activeClassName="active" to="/cart">
               Cart
