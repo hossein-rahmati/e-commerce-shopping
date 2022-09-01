@@ -8,7 +8,7 @@
   }
 
   .navLinks {
-    @apply px-4 py-3 hover:ring-2 ring-white rounded-sm;
+    @apply px-4 py-3 ring-2 ring-white rounded-sm;
   }
 
   .btn {
@@ -23,5 +23,6 @@
 @layer base {
   body {
     font-family: "Poppins", sans-serif;
+    background-color: rgb(226, 232, 240);
   }
 }
