@@ -4,15 +4,15 @@
 
 @layer components {
   .active {
-    @apply bg-white text-black font-bold  px-4 py-3 rounded-sm;
+    @apply bg-white text-black font-bold  px-4 py-3 rounded-md;
   }
 
   .navLinks {
-    @apply px-4 py-3 ring-2 ring-white rounded-sm;
+    @apply px-4 py-3 ring-2 ring-white rounded-md;
   }
 
   .btn {
-    @apply px-2 py-1 bg-white text-black mb-2 rounded-sm hover:bg-gray-300 transition-all duration-200;
+    @apply px-2 py-1 bg-white text-black mb-2 rounded-md hover:bg-gray-300 transition-all duration-200;
   }
 
   .primary {
