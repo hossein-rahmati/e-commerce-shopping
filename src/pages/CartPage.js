@@ -34,13 +34,13 @@ const CartPage = () => {
 
         {/* the cart section */}
         <section className="basis-4/6 p-2">
-          <h1 className="text-4xl font-bold mx-4 mb-12">YOUR CART</h1>
+          <h1 className="text-4xl font-bold mx-4 mb-24 sm:mb-12">YOUR CART</h1>
 
           {/* map on cart products */}
           {cart.map((item) => {
             return (
               <div
-                className=" flex flex-col items-center justify-between h-28 mb-44 sm:flex-row sm:mb-20 sm:max-w-3xl sm:mx-auto"
+                className="centerItem flex-col h-28 mb-44 sm:flex-row sm:mb-20 sm:max-w-3xl sm:mx-auto"
                 key={item.id}
               >
                 <div>
@@ -55,7 +55,7 @@ const CartPage = () => {
                   <p>${item.offPrice * item.quantity}</p>
                 </div>
 
-                <div className="flex items-center w-52 bg-slate-800 pb-2 rounded-b-md sm:flex-1 sm:h-44 sm:flex-row sm:justify-around sm:rounded-tr-md sm:rounded-br-md sm:rounded-bl-none">
+                <div className="flex items-center justify-between pt-3 px-2 w-52 bg-slate-800 pb-2 rounded-b-md sm:flex-1 sm:h-44 sm:flex-row sm:justify-around sm:rounded-tr-md sm:rounded-br-md sm:rounded-bl-none">
                   <button
                     onClick={() => decrementHandler(item)}
                     className="text-red-500 bg-white p-2 rounded-md"
@@ -92,19 +92,19 @@ const CartSummery = () => {
 
   return (
     <section className="basis-2/6 p-2">
-      <h2 className="text-4xl font-bold mx-4 mb-4">SUMMERY</h2>
+      <h2 className="title mx-4">SUMMERY</h2>
       <section className="bg-slate-700 text-white flex flex-col rounded-md mx-2 gap-y-4 justify-between h-auto p-4 mb-12 sm:mb-20 sm:max-w-3xl sm:mx-auto ">
-        <div className="flex items-center justify-between">
+        <div className="centerItem">
           <p>Subtotal</p>
           <p>${originalTotalPrice}</p>
         </div>
 
-        <div className="flex items-center justify-between mb-2 pb-1 border-b-2 border-gray-500">
+        <div className="centerItem mb-2 pb-1 border-b-2 border-gray-500">
           <p>discount</p>
           <p>{originalTotalPrice - total}</p>
         </div>
 
-        <div className="flex items-center justify-between mb-2">
+        <div className="centerItem mb-2">
           <p>Total</p>
           <p>{total}</p>
         </div>

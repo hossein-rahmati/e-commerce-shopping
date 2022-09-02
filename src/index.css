@@ -3,12 +3,20 @@
 @tailwind utilities;
 
 @layer components {
+  .title {
+    @apply text-4xl font-bold mb-4;
+  }
+
+  .centerItem {
+    @apply flex items-center justify-center;
+  }
+
   .active {
-    @apply bg-white text-black font-bold  px-4 py-3 rounded-md;
+    @apply bg-white text-black font-bold px-4 py-3 rounded-md;
   }
 
   .navLinks {
-    @apply px-4 py-3 ring-2 ring-white rounded-md;
+    @apply px-2 py-2 ring-2 ring-white rounded-md sm:px-4 sm:py-3;
   }
 
   .btn {
@@ -17,6 +25,30 @@
 
   .primary {
     @apply bg-black text-white;
+  }
+
+  .formControl {
+    @apply mb-4 w-72 sm:w-96;
+  }
+
+  .error {
+    @apply text-red-400 w-96;
+  }
+
+  label {
+    @apply flex mb-1  text-white;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  select {
+    @apply w-72 sm:w-96 py-2 px-4 border border-zinc-200 rounded-lg;
+  }
+
+  button:disabled {
+    @apply bg-gray-300 cursor-not-allowed;
   }
 }
 
