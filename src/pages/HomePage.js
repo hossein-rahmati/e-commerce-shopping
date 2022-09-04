@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useEffect } from "react";
 import * as data from "../data";
 import Layout from "../layout/Layout";
 import { checkInCart } from "../utils/checkInCart";

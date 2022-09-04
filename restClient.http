@@ -1,0 +1,27 @@
+###
+GET https://nodejs-post-app.herokuapp.com/api/product
+
+###
+POST https://nodejs-post-app.herokuapp.com/api/user/register
+content-type: application/json
+
+{
+    "email": "test@gmail9.com",
+    "password": "testsaafgfsgfsegveg",
+    "name":"ggggg m",
+    "phoneNumber":"09188551500"
+}
+
+###
+POST https://nodejs-post-app.herokuapp.com/api/user/login
+content-type: application/json
+
+{
+    "email": "test@gmail9.com",
+    "password": "testsaafgfsgfsegveg"
+}
+
+
+###
+GET https://nodejs-post-app.herokuapp.com/api/product/seed HTTP/1.1
+content-type: application/json

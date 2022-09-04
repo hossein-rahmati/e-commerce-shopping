@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <CartProvider>
-        <ToastContainer autoClose={2000} />
+        <ToastContainer />
         <Switch>
           <Route path="/cart" component={CartPage} />
           <Route path="/checkout" component={CheckoutPage} />

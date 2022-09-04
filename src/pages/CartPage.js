@@ -94,17 +94,17 @@ const CartSummery = () => {
     <section className="basis-2/6 p-2">
       <h2 className="title mx-4">SUMMERY</h2>
       <section className="bg-slate-700 text-white flex flex-col rounded-md mx-2 gap-y-4 justify-between h-auto p-4 mb-12 sm:mb-20 sm:max-w-3xl sm:mx-auto ">
-        <div className="centerItem">
+        <div className="flex items-center justify-between">
           <p>Subtotal</p>
           <p>${originalTotalPrice}</p>
         </div>
 
-        <div className="centerItem mb-2 pb-1 border-b-2 border-gray-500">
+        <div className="flex items-center justify-between mb-2 pb-1 border-b-2 border-gray-500">
           <p>discount</p>
           <p>{originalTotalPrice - total}</p>
         </div>
 
-        <div className="centerItem mb-2">
+        <div className="flex items-center justify-between mb-2">
           <p>Total</p>
           <p>{total}</p>
         </div>

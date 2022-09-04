@@ -3,11 +3,13 @@ import Input from "../common/Input";
 import * as yup from "yup";
 import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
+import signupUser from "../services/signupService";
+import { toast } from "react-toastify";
 
 const initialValues = {
   name: "",
   email: "",
-  phone: "",
+  phoneNumber: "",
   password: "",
   passwordConfirm: "",
 };
@@ -20,11 +22,10 @@ const validationSchema = yup.object({
     .email("Invalid email address")
     .required("Email is required"),
 
-  phone: yup
+  phoneNumber: yup
     .string()
     .required("Phone is required")
-    .matches(/^[0-9]{11}$/, "Invalid phone number") //set a limit to the length of the phone number
-    .nullable(),
+    .matches(/^[0-9]{11}$/, "Invalid phone number"),
 
   password: yup
     .string()
@@ -34,15 +35,33 @@ const validationSchema = yup.object({
   passwordConfirm: yup
     .string()
     .required("Password confirmation is required")
-    .oneOf([yup.ref("password"), null], "Passwords must match"), // for checking if the password is the same
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
 const SignUp = () => {
+  const onSubmit = (values) => {
+    const { name, email, phoneNumber, password } = values;
+    const userData = {
+      name,
+      email,
+      phoneNumber,
+      password,
+    };
+
+    signupUser(userData)
+      .then((res) => console.log(res.data))
+      .catch((err) => {
+        if (err.response.data.message && err.response) {
+          toast.error(err.response.data.message);
+        }
+      });
+  };
+
   const formik = useFormik({
-    initialValues: initialValues, //initial values of the form
-    // onSubmit, //function to run when the form is submitted
-    validationSchema, //validation schema for the form
-    validateOnMount: true, //validate the forms when the component is mounted
+    initialValues,
+    onSubmit,
+    validationSchema,
+    validateOnMount: true,
   });
 
   return (
@@ -59,7 +78,7 @@ const SignUp = () => {
 
             <Input
               formik={formik}
-              name="phone"
+              name="phoneNumber"
               label="Phone Number"
               type="tel"
             />
@@ -79,7 +98,7 @@ const SignUp = () => {
             />
 
             <button
-              disabled={!formik.isValid} //disable the button if the form had errors
+              disabled={!formik.isValid}
               type="submit"
               className="px-6 py-2 btn w-full my-4 cursor-pointer"
             >
