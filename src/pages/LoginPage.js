@@ -3,6 +3,8 @@ import Input from "../common/Input";
 import * as yup from "yup";
 import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
+import loginUser from "../services/loginService";
+import { toast } from "react-toastify";
 
 const initialValues = {
   email: "",
@@ -22,11 +24,21 @@ const validationSchema = yup.object({
 });
 
 const Login = () => {
+  const onSubmit = (values) => {
+    loginUser(values)
+      .then((res) => console.log(res.data))
+      .catch((err) => {
+        if (err.response && err.response.data.message) {
+          toast.error(err.response.data.message);
+        }
+      });
+  };
+
   const formik = useFormik({
-    initialValues: initialValues, //initial values of the form
-    // onSubmit, //function to run when the form is submitted
-    validationSchema, //validation schema for the form
-    validateOnMount: true, //validate the forms when the component is mounted
+    initialValues: initialValues,
+    onSubmit,
+    validationSchema,
+    validateOnMount: true,
   });
 
   return (
@@ -47,7 +59,7 @@ const Login = () => {
             />
 
             <button
-              disabled={!formik.isValid} //disable the button if the form had errors
+              disabled={!formik.isValid}
               type="submit"
               className="px-6 py-2 btn w-full my-4 cursor-pointer"
             >
