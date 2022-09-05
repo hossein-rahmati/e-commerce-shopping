@@ -5,7 +5,9 @@ import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
 import loginUser from "../services/loginService";
 import { toast } from "react-toastify";
-import { useAuthActions } from "../providers/AuthProvider";
+import { useAuth, useAuthActions } from "../providers/AuthProvider";
+import useQuery from "../hooks/useQuery";
+import { useEffect } from "react";
 
 const initialValues = {
   email: "",
@@ -25,12 +27,15 @@ const validationSchema = yup.object({
 });
 
 const Login = ({ history }) => {
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
   const setAuth = useAuthActions();
+  const Auth = useAuth();
 
   const onSubmit = (values) => {
     loginUser(values)
       .then((res) => {
-        history.push("/");
+        history.push(redirect);
         setAuth(res.data);
         localStorage.setItem("authState", JSON.stringify(res.data));
       })
@@ -47,6 +52,10 @@ const Login = ({ history }) => {
     validationSchema,
     validateOnMount: true,
   });
+
+  useEffect(() => {
+    if (Auth) history.push(redirect);
+  }, [redirect, Auth]);
 
   return (
     <Layout>
@@ -74,7 +83,7 @@ const Login = ({ history }) => {
             </button>
           </form>
           <div className="text-white">
-            <Link to="/signup">
+            <Link to={`/signup?redirect=${redirect}`}>
               Don't have an account?{" "}
               <span className="text-blue-300">Sign up</span>
             </Link>

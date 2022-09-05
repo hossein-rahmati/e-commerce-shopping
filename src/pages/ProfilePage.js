@@ -7,6 +7,7 @@ const Profile = ({ history }) => {
 
   const submitHandler = () => {
     setAuth(false);
+    localStorage.removeItem("authState");
     history.push("/");
   };
 

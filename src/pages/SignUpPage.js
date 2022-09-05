@@ -5,7 +5,9 @@ import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
 import signupUser from "../services/signupService";
 import { toast } from "react-toastify";
-import { useAuthActions } from "../providers/AuthProvider";
+import { useAuth, useAuthActions } from "../providers/AuthProvider";
+import useQuery from "../hooks/useQuery";
+import { useEffect } from "react";
 
 const initialValues = {
   name: "",
@@ -40,7 +42,10 @@ const validationSchema = yup.object({
 });
 
 const SignUp = ({ history }) => {
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
   const setAuth = useAuthActions();
+  const Auth = useAuth();
 
   const onSubmit = (values) => {
     const { name, email, phoneNumber, password } = values;
@@ -53,7 +58,7 @@ const SignUp = ({ history }) => {
 
     signupUser(userData)
       .then((res) => {
-        history.push("/");
+        history.push(redirect);
         setAuth(res.data);
         localStorage.setItem("authState", JSON.stringify(res.data));
       })
@@ -70,6 +75,10 @@ const SignUp = ({ history }) => {
     validationSchema,
     validateOnMount: true,
   });
+
+  useEffect(() => {
+    if (Auth) history.push(redirect);
+  }, [redirect, Auth]);
 
   return (
     <Layout>
@@ -113,7 +122,7 @@ const SignUp = ({ history }) => {
             </button>
           </form>
           <div className="text-white">
-            <Link to="/login">
+            <Link to={`/login?redirect=${redirect}`}>
               already have an account?{" "}
               <span className="text-blue-300">Login</span>
             </Link>

@@ -109,7 +109,7 @@ const CartSummery = () => {
           <p>{total}</p>
         </div>
 
-        <Link to="/checkout">
+        <Link to="/signup?redirect=checkout">
           <button className="btn w-full">Checkout</button>
         </Link>
       </section>
