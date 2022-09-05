@@ -7,20 +7,25 @@ import CheckoutPage from "./pages/CheckoutPage";
 import CartProvider from "./providers/CartProvider";
 import Login from "./pages/LoginPage";
 import SignUp from "./pages/SignUpPage";
+import AuthProvider from "./providers/AuthProvider";
+import Profile from "./pages/ProfilePage";
 
 function App() {
   return (
     <Router>
-      <CartProvider>
-        <ToastContainer />
-        <Switch>
-          <Route path="/cart" component={CartPage} />
-          <Route path="/checkout" component={CheckoutPage} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/" component={HomePage} />
-        </Switch>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <ToastContainer />
+          <Switch>
+            <Route path="/profile" component={Profile} />
+            <Route path="/cart" component={CartPage} />
+            <Route path="/checkout" component={CheckoutPage} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </CartProvider>
+      </AuthProvider>
     </Router>
   );
 }

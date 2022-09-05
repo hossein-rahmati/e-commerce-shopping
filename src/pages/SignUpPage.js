@@ -5,6 +5,7 @@ import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
 import signupUser from "../services/signupService";
 import { toast } from "react-toastify";
+import { useAuthActions } from "../providers/AuthProvider";
 
 const initialValues = {
   name: "",
@@ -38,7 +39,9 @@ const validationSchema = yup.object({
     .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
-const SignUp = () => {
+const SignUp = ({ history }) => {
+  const setAuth = useAuthActions();
+
   const onSubmit = (values) => {
     const { name, email, phoneNumber, password } = values;
     const userData = {
@@ -49,7 +52,11 @@ const SignUp = () => {
     };
 
     signupUser(userData)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        history.push("/");
+        setAuth(res.data);
+        localStorage.setItem("authState", JSON.stringify(res.data));
+      })
       .catch((err) => {
         if (err.response.data.message && err.response) {
           toast.error(err.response.data.message);

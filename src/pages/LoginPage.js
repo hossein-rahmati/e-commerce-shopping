@@ -5,6 +5,7 @@ import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
 import loginUser from "../services/loginService";
 import { toast } from "react-toastify";
+import { useAuthActions } from "../providers/AuthProvider";
 
 const initialValues = {
   email: "",
@@ -23,10 +24,16 @@ const validationSchema = yup.object({
     .min(6, "must be at least 6 characters"),
 });
 
-const Login = () => {
+const Login = ({ history }) => {
+  const setAuth = useAuthActions();
+
   const onSubmit = (values) => {
     loginUser(values)
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        history.push("/");
+        setAuth(res.data);
+        localStorage.setItem("authState", JSON.stringify(res.data));
+      })
       .catch((err) => {
         if (err.response && err.response.data.message) {
           toast.error(err.response.data.message);

@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../providers/AuthProvider";
 import { useCart } from "../providers/CartProvider";
 
 const Navigation = () => {
   const { cart } = useCart();
+  const Auth = useAuth();
+
   return (
     <header className="w-full h-20 bg-slate-700 text-white mb-8">
       <nav className="flex items-center justify-between h-full px-3 sm:px-10">
@@ -27,9 +30,9 @@ const Navigation = () => {
               className="navLinks"
               activeClassName="active"
               exact
-              to="/login"
+              to={Auth ? "/profile" : "/login"}
             >
-              Login
+              {Auth ? "Profile" : "Login"}
             </NavLink>
           </li>
         </ul>
